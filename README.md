@@ -408,7 +408,7 @@ Importez les endpoints dans Postman et testez les différentes requêtes.
 ## 👥 Auteur
 
 Projet développé pour démontrer une architecture microservices avec Spring Cloud.
-
+ZAKI EL IDRISSI Abdallah
 ## 📄 Licence
 
 Ce projet est à des fins éducatives.
