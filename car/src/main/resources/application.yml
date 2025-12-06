@@ -1,0 +1,65 @@
+server:
+  port: 8082  # Port pour le service voiture
+
+spring:
+  application:
+    name: SERVICE-CAR  # Nom du service tel qu'il apparaîtra dans Eureka
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/carservicedb?createDatabaseIfNotExist=true
+    username: "root"
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update  # Crée ou met à jour automatiquement le schéma
+    show-sql: true  # Affiche les requêtes SQL générées
+
+# Configuration Actuator (monitoring et health checks)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,discovery  # Endpoints exposés
+      base-path: /actuator  # Chemin de base pour les endpoints
+  endpoint:
+    health:
+      show-details: always  # Affiche les détails de santé
+    info:
+      enabled: true  # Active l'endpoint /info
+  info:
+    env:
+      enabled: true
+    java:
+      enabled: true
+    os:
+      enabled: true
+    app:
+      name: ${spring.application.name}
+      description: Service de gestion des voitures
+      version: 0.0.1-SNAPSHOT
+      encoding: UTF-8
+      java:
+        version: ${java.version}
+
+# Configuration Eureka
+eureka:
+  client:
+    enabled: true  # Active le client Eureka
+    register-with-eureka: true  # S'enregistre auprès d'Eureka
+    fetch-registry: true  # Récupère le registre des services
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # URL du serveur Eureka
+    # Configuration pour gérer les échecs de connexion
+    initial-instance-info-replication-interval-seconds: 5
+    instance-info-replication-interval-seconds: 10
+    eureka-service-url-poll-interval-seconds: 10
+    eureka-server-connect-timeout-seconds: 5
+    eureka-server-read-timeout-seconds: 8
+    # Retry configuration
+    retryable-client-requests: true
+  instance:
+    prefer-ip-address: true  # Utilise l'adresse IP plutôt que le nom d'hôte
+    lease-renewal-interval-in-seconds: 10  # Intervalle de renouvellement du bail (heartbeat)
+    lease-expiration-duration-in-seconds: 30  # Durée avant expiration si pas de heartbeat
+    hostname: localhost
+    instance-id: ${spring.application.name}:${server.port}
