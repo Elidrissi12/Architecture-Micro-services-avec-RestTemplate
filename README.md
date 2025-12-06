@@ -1,6 +1,7 @@
 # Architecture Microservices avec RestTemplate
 
 Ce projet présente une architecture microservices complète utilisant Spring Boot, Spring Cloud, Eureka pour la découverte de services, Spring Cloud Gateway comme API Gateway, et RestTemplate pour la communication inter-services.
+<img width="940" height="375" alt="image" src="https://github.com/user-attachments/assets/edfbe278-8102-414f-b01f-567e13985c05" />
 
 ## 📋 Table des matières
 
